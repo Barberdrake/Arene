@@ -1,9 +1,9 @@
-import pygame, sys
-from button import Button
-import pygame, os
+import sys
+import os
+import random
 import pygame
 from pygame import mixer
-import pygame, sys, random
+from button import Button
 
 """Game made by people with limited and basic knowledge on coding, PLZ no hate, THANKS FOR PLAYING <3"""
 

@@ -35,6 +35,7 @@ BLACK = (0, 0, 0)
 PURPLE = (150, 0, 150)
 YELLOW = (255, 212, 75)
 LIGHT_BLUISH_WHITE = (173, 216, 230)
+PeachPuff = (255, 218, 185)
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
@@ -83,7 +84,8 @@ max_wall = 60
 purple_spawn_count = 2
 yellow_spawn_timer = 4
 FROST = 0
-frost_spawn_interval = 4 
+frost_spawn_interval = 4
+PEACH_spawn_interval = 10
 clock = pygame.time.Clock()
 
 def options():
@@ -217,6 +219,8 @@ def draw_arena():
                 color = YELLOW
             elif grid[y][x] == "frost":
                 color = LIGHT_BLUISH_WHITE
+            elif grid[y][x] == "PeachPuff":
+                color = PeachPuff
 
             if (x, y) == (player_blue["x"], player_blue["y"]):
                 color = Player_1_Blue
@@ -233,11 +237,11 @@ def frost_animation(target_player):
     global target_y
     FROST = 1
     if target_player == player_red:
-        target_x = (window_width // 6)*4
-        target_y = OPTION_Y - 250
+        target_x = 1370
+        target_y = OPTION_Y - 280
     else:
-        target_x = 50
-        target_y = OPTION_Y - 300
+        target_x = 95
+        target_y = OPTION_Y - 280
     pygame.display.flip()
 
 def spawn_energy():
@@ -260,6 +264,13 @@ def spawn_energy():
             if grid[y][x] == "green":
                 grid[y][x] = "frost"
                 break
+            
+    if rounds % PEACH_spawn_interval == 0:
+        while True:
+            x, y = random.randint(0, GRID_SIZE - 1), random.randint(0, GRID_SIZE - 1)
+            if grid[y][x] == "green":
+                grid[y][x] = "PeachPuff"
+                break
 
 def spawn_walls():
     global wall_count
@@ -279,6 +290,8 @@ def spawn_walls():
 
 def move_player(player, dx, dy, trail_color, player_color, opponent):
     """Moves the player on the grid with logic for frost effect."""
+    global rounds
+    
     nx, ny = player["x"] + dx, player["y"] + dy
 
     if 0 <= nx < GRID_SIZE and 0 <= ny < GRID_SIZE and grid[ny][nx] not in ("gray"):
@@ -304,6 +317,10 @@ def move_player(player, dx, dy, trail_color, player_color, opponent):
                 for j in range(max(0, nx - 2), min(GRID_SIZE, nx + 3)):
                     if grid[i][j] not in ("black", "gray"):
                         grid[i][j] = trail_color
+                        
+        elif grid[ny][nx] == "PeachPuff":
+            rounds += 6
+        
         return False
 
 def get_font(size): 

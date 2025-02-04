@@ -13,8 +13,11 @@ background_music_volume = 0.5  #variable for Background sound volume
 mixer.music.set_volume(background_music_volume) #setting Background sound volume
 mixer.music.play(-1) #playing Background Sound
 
+Error_Sound = mixer.Sound("music/error_sound.wav")
+Error_Sound.set_volume(1.0)
+
 #Sound effects uploading
-Purple_SFX = mixer.Sound("music/squeak_sound.wav") #need to change and place
+Purple_SFX = mixer.Sound("music/squeak_sound.wav") 
 Yellow_SFX = mixer.Sound("music/angelic_choir_sound.wav")
 Freeze_SFX = mixer.Sound("music/freezing_sound.wav")
 Peach_Puff_SFX = mixer.Sound("music/thingly_sound.wav")
@@ -163,38 +166,54 @@ def options():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if OPTIONS_BACK.checkForInput(OPTIONS_MOUSE_POS):
                     main_menu()
+                    
                 if PLUS_BUTTON_Background.checkForInput(OPTIONS_MOUSE_POS):
+                    if background_music_volume == 1.0:
+                        Error_Sound.play()
                     background_music_volume = min(background_music_volume + 0.1, 1.0)
                     set_background_music_volume(background_music_volume)
                 if MINUS_BUTTON_Background.checkForInput(OPTIONS_MOUSE_POS):
+                    if background_music_volume == 0.0:
+                        Error_Sound.play()
                     background_music_volume = max(background_music_volume - 0.1, 0.0)
                     set_background_music_volume(background_music_volume)
+                    
                 if PLUS_BUTTON_SFX.checkForInput(OPTIONS_MOUSE_POS):
+                    if volume_SFX == 1.0:
+                        Error_Sound.play()
                     volume_SFX = min(volume_SFX + 0.1, 1.0)
                     set_sound_effect_volume(volume_SFX)
                     print(f"Volume increased to {volume_SFX:.1f}")
                     print("hii")
                 if MINUS_BUTTON_SFX.checkForInput(OPTIONS_MOUSE_POS):
+                    if volume_SFX == 0.0:
+                        Error_Sound.play()
                     volume_SFX = max(volume_SFX - 0.1, 0.0)
                     set_sound_effect_volume(volume_SFX)
                     print(f"Volume decreased to {volume_SFX:.1f}")
                     print("byee")
+                    
                 if PLUS_BUTTON_Wall_Count.checkForInput(OPTIONS_MOUSE_POS):
                     wall_count += 1
                     if wall_count > 10:
                         wall_count = 10
+                        Error_Sound.play()
                 if MINUS_BUTTON_Wall_Count.checkForInput(OPTIONS_MOUSE_POS):
                     wall_count -= 1
                     if wall_count < 3:
                         wall_count = 3
+                        Error_Sound.play()
+                        
                 if PLUS_BUTTON_Max_Wall.checkForInput(OPTIONS_MOUSE_POS):
                     max_wall += 3
                     if max_wall > 99:
                         max_wall = 99
+                        Error_Sound.play()
                 if MINUS_BUTTON_Max_Wall.checkForInput(OPTIONS_MOUSE_POS):
                     max_wall -= 3
                     if max_wall < 12:
                         max_wall = 12
+                        Error_Sound.play()
         pygame.display.update()
 
 def draw_arena():

@@ -17,7 +17,7 @@ mixer.music.play(-1) #playing Background Sound
 Purple_SFX = mixer.Sound("music/squeak_sound.wav") #need to change and place
 Yellow_SFX = mixer.Sound("music/angelic_choir_sound.wav")
 Freeze_SFX = mixer.Sound("music/freezing_sound.wav")
-Peach_Puff_SFX = mixer.Sound("music/Magic_puff_sound.wav")
+Peach_Puff_SFX = mixer.Sound("music/thingly_sound.wav")
 Winning_SFX = mixer.Sound("music/yay_sound.wav")
 volume_SFX = 1 #variable for sound effects volume
 

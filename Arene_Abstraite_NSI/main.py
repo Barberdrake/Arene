@@ -22,21 +22,19 @@ Winning_SFX = mixer.Sound("music/yay_sound.wav")
 volume_SFX = 1 #variable for sound effects volume
 
 #Player Colours
-Player1_Blue = (0, 108, 191)  #player
-Player2_Red = (186, 41, 75) #player
+Player1_Blue = (0, 108, 191)  #player 1's colour
+Player2_Red = (186, 41, 75) #player 2's colour
 #Trail Colours
-Blue_Trail = (69, 156, 224, 100) #trail
-Red_Trail = (237, 93, 127, 100) #trail
+Blue_Trail = (69, 156, 224, 100) #trail colour for player 1
+Red_Trail = (237, 93, 127, 100) #trail colour for player 2
 
-#Arena colours
-GREEN = (138, 171, 124)
-GRAY = (50, 50, 50)
-BLACK = (0, 0, 0)
-#Effect Colours
-PURPLE = (150, 0, 150)
-YELLOW = (255, 212, 75)
-LIGHT_BLUISH_WHITE = (173, 216, 230)
-PEACH = (255, 218, 185)
+BLACK = (0, 0, 0) #button colours
+GRAY = (50, 50, 50) #wall color
+GREEN = (138, 171, 124) #background of the arena
+PURPLE = (150, 0, 150) #3x3 effect, purple colour
+YELLOW = (255, 212, 75) #5x5 effect, yellow colour
+LIGHT_BLUISH_WHITE = (173, 216, 230) #frost effect colour
+PEACH = (255, 218, 185) #add rounds effect, peach colour
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
@@ -102,51 +100,56 @@ def options():
         OPTIONS_TEXT = get_font(45).render("MENU / OPTIONS", True, "Black")
         OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(window_width//2,window_height*0.1))
         SCREEN.blit(OPTIONS_TEXT, OPTIONS_RECT)
+
+        #TEXT for the Wall Count per Round Option
+        Wall_Count_TEXT = get_font(45).render(str(wall_count), True, "Black")
+        Wall_Count_RECT = Wall_Count_TEXT.get_rect(center=(window_width//2+350,window_height*0.6))
+        SCREEN.blit(Wall_Count_TEXT, Wall_Count_RECT)
         
-        RER_TEXT = get_font(45).render(str(wall_count), True, "Black")
-        RER_RECT = RER_TEXT.get_rect(center=(window_width//2+350,window_height*0.6))
-        SCREEN.blit(RER_TEXT, RER_RECT)
+        Walls_Rounds_TEXT = get_font(45).render("Walls per round: ", True, "Black")
+        Walls_Rounds_RECT = Walls_Rounds_TEXT.get_rect(center=(window_width//2-30,window_height*0.6))
+        SCREEN.blit(Walls_Rounds_TEXT, Walls_Rounds_RECT)
+
         
-        REeR_TEXT = get_font(45).render("Walls per round: ", True, "Black")
-        REeR_RECT = REeR_TEXT.get_rect(center=(window_width//2-30,window_height*0.6))
-        SCREEN.blit(REeR_TEXT, REeR_RECT)
+        #TEXT for the Max Walls per Round
+        Wall_MaxNumber_TEXT = get_font(45).render(str(max_wall), True, "Black")
+        Wall_MaxNumber_RECT = Wall_MaxNumber_TEXT.get_rect(center=(window_width//2+225,window_height*0.8))
+        SCREEN.blit(Wall_MaxNumber_TEXT, Wall_MaxNumber_RECT)
         
-        RER_TEXT = get_font(45).render(str(max_wall), True, "Black")
-        RER_RECT = RER_TEXT.get_rect(center=(window_width//2+225,window_height*0.8))
-        SCREEN.blit(RER_TEXT, RER_RECT)
-        
-        REeR_TEXT = get_font(45).render("Max walls: ", True, "Black")
-        REeR_RECT = REeR_TEXT.get_rect(center=(window_width//2-30,window_height*0.8))
-        SCREEN.blit(REeR_TEXT, REeR_RECT)
-        
-        Backgroundmus_TEXT = get_font(45).render("Background", True, "Black")
-        Backgroundmus_RECT = Backgroundmus_TEXT.get_rect(center=(window_width//2,window_height*0.2))
-        SCREEN.blit(Backgroundmus_TEXT, Backgroundmus_RECT)
-        
-        SFXX_TEXT = get_font(45).render("Sound Effects", True, "Black")
-        SFXX_RECT = SFXX_TEXT.get_rect(center=(window_width//2,window_height*0.4))
-        SCREEN.blit(SFXX_TEXT, SFXX_RECT)
+        Walls_Max_TEXT = get_font(45).render("Max walls: ", True, "Black")
+        Walls_Max_RECT = Walls_Max_TEXT.get_rect(center=(window_width//2-30,window_height*0.8))
+        SCREEN.blit(Walls_Max_TEXT, Walls_Max_RECT)
+
+        #TEXT for Background Sound Volume Options
+        Background_TEXT = get_font(45).render("Background Volume", True, "Black")
+        Background_RECT = Background_TEXT.get_rect(center=(window_width//2,window_height*0.2))
+        SCREEN.blit(Background_TEXT, Background_RECT)
+
+        #TEXT for Sound effects Volume Options
+        SFX_TEXT = get_font(45).render("SFX Volume", True, "Black")
+        SFX_RECT = SFX_TEXT.get_rect(center=(window_width//2,window_height*0.4))
+        SCREEN.blit(SFX_TEXT, SFX_RECT)
 
         OPTIONS_BACK = Button(image=None, pos=(window_width//2,QUIT_Y), 
                             text_input="BACK", font=get_font(75), base_color="Black", hovering_color="Green")
-        PLUS_BUTTON_ONE = Button(image=pygame.image.load("assets/plus.png"), pos=(window_width*3//4,window_height*0.2), 
+        PLUS_BUTTON_Background = Button(image=pygame.image.load("assets/plus.png"), pos=(window_width*3//4,window_height*0.2), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        MINUS_BUTTON_ONE = Button(image=pygame.image.load("assets/minus.png"), pos=(window_width//4,window_height*0.2), 
+        MINUS_BUTTON_Background = Button(image=pygame.image.load("assets/minus.png"), pos=(window_width//4,window_height*0.2), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        PLUS_BUTTON_TWO = Button(image=pygame.image.load("assets/plus.png"), pos=(window_width*3//4,window_height*0.4), 
+        PLUS_BUTTON_SFX = Button(image=pygame.image.load("assets/plus.png"), pos=(window_width*3//4,window_height*0.4), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        MINUS_BUTTON_TWO = Button(image=pygame.image.load("assets/minus.png"), pos=(window_width//4,window_height*0.4), 
+        MINUS_BUTTON_SFX = Button(image=pygame.image.load("assets/minus.png"), pos=(window_width//4,window_height*0.4), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        PLUS_BUTTON_THREE = Button(image=pygame.image.load("assets/plus.png"), pos=(window_width*3//4,window_height*0.6), 
+        PLUS_BUTTON_Wall_Count = Button(image=pygame.image.load("assets/plus.png"), pos=(window_width*3//4,window_height*0.6), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        MINUS_BUTTON_THREE = Button(image=pygame.image.load("assets/minus.png"), pos=(window_width//4,window_height*0.6), 
+        MINUS_BUTTON_Wall_Count = Button(image=pygame.image.load("assets/minus.png"), pos=(window_width//4,window_height*0.6), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        PLUS_BUTTON_FOUR = Button(image=pygame.image.load("assets/plus.png"), pos=(window_width*3//4,window_height*0.8), 
+        PLUS_BUTTON_Max_Wall = Button(image=pygame.image.load("assets/plus.png"), pos=(window_width*3//4,window_height*0.8), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        MINUS_BUTTON_FOUR = Button(image=pygame.image.load("assets/minus.png"), pos=(window_width//4,window_height*0.8), 
+        MINUS_BUTTON_Max_Wall = Button(image=pygame.image.load("assets/minus.png"), pos=(window_width//4,window_height*0.8), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
         
-        for button in [PLUS_BUTTON_ONE, MINUS_BUTTON_ONE, PLUS_BUTTON_TWO, MINUS_BUTTON_TWO, PLUS_BUTTON_THREE, MINUS_BUTTON_THREE, PLUS_BUTTON_FOUR, MINUS_BUTTON_FOUR]:
+        for button in [PLUS_BUTTON_Background, MINUS_BUTTON_Background, PLUS_BUTTON_SFX, MINUS_BUTTON_SFX, PLUS_BUTTON_Wall_Count, MINUS_BUTTON_Wall_Count, PLUS_BUTTON_Max_Wall, MINUS_BUTTON_Max_Wall]:
             button.changeColor(OPTIONS_MOUSE_POS)
             button.update(SCREEN)
         
@@ -160,40 +163,38 @@ def options():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if OPTIONS_BACK.checkForInput(OPTIONS_MOUSE_POS):
                     main_menu()
-                if PLUS_BUTTON_ONE.checkForInput(OPTIONS_MOUSE_POS):
+                if PLUS_BUTTON_Background.checkForInput(OPTIONS_MOUSE_POS):
                     background_music_volume = min(background_music_volume + 0.1, 1.0)
                     set_background_music_volume(background_music_volume)
-                if MINUS_BUTTON_ONE.checkForInput(OPTIONS_MOUSE_POS):
+                if MINUS_BUTTON_Background.checkForInput(OPTIONS_MOUSE_POS):
                     background_music_volume = max(background_music_volume - 0.1, 0.0)
                     set_background_music_volume(background_music_volume)
-                if PLUS_BUTTON_TWO.checkForInput(OPTIONS_MOUSE_POS):
+                if PLUS_BUTTON_SFX.checkForInput(OPTIONS_MOUSE_POS):
                     volume_SFX = min(volume_SFX + 0.1, 1.0)
                     set_sound_effect_volume(volume_SFX)
                     print(f"Volume increased to {volume_SFX:.1f}")
                     print("hii")
-                if MINUS_BUTTON_TWO.checkForInput(OPTIONS_MOUSE_POS):
+                if MINUS_BUTTON_SFX.checkForInput(OPTIONS_MOUSE_POS):
                     volume_SFX = max(volume_SFX - 0.1, 0.0)
                     set_sound_effect_volume(volume_SFX)
                     print(f"Volume decreased to {volume_SFX:.1f}")
                     print("byee")
-                if PLUS_BUTTON_THREE.checkForInput(OPTIONS_MOUSE_POS):
+                if PLUS_BUTTON_Wall_Count.checkForInput(OPTIONS_MOUSE_POS):
                     wall_count += 1
                     if wall_count > 10:
                         wall_count = 10
-                if MINUS_BUTTON_THREE.checkForInput(OPTIONS_MOUSE_POS):
+                if MINUS_BUTTON_Wall_Count.checkForInput(OPTIONS_MOUSE_POS):
                     wall_count -= 1
                     if wall_count < 3:
                         wall_count = 3
-                if PLUS_BUTTON_FOUR.checkForInput(OPTIONS_MOUSE_POS):
+                if PLUS_BUTTON_Max_Wall.checkForInput(OPTIONS_MOUSE_POS):
                     max_wall += 3
                     if max_wall > 99:
                         max_wall = 99
-                if MINUS_BUTTON_FOUR.checkForInput(OPTIONS_MOUSE_POS):
+                if MINUS_BUTTON_Max_Wall.checkForInput(OPTIONS_MOUSE_POS):
                     max_wall -= 3
                     if max_wall < 12:
                         max_wall = 12
-                set_sound_effect_volume(volume_SFX)   
-
         pygame.display.update()
 
 def draw_arena():

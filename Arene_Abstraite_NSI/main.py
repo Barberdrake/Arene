@@ -19,7 +19,7 @@ Yellow_SFX = mixer.Sound("music/angelic_choir_sound.wav")
 Freeze_SFX = mixer.Sound("music/freezing_sound.wav")
 Peach_Puff_SFX = mixer.Sound("music/Magic_puff_sound.wav")
 Winning_SFX = mixer.Sound("music/yay_sound.wav")
-volume_SFX=1 #variable for sound effects volume
+volume_SFX = 1 #variable for sound effects volume
 
 #Player Colours
 Player1_Blue = (0, 108, 191)  #player
@@ -90,8 +90,8 @@ peach_spawn_interval = 10
 clock = pygame.time.Clock()
 
 def options():
-    global _SFX
-    global background_music_
+    global volume_SFX
+    global background_music_volume
     global wall_count
     global max_wall
     while True:
@@ -161,19 +161,21 @@ def options():
                 if OPTIONS_BACK.checkForInput(OPTIONS_MOUSE_POS):
                     main_menu()
                 if PLUS_BUTTON_ONE.checkForInput(OPTIONS_MOUSE_POS):
-                    background_music_ = min(background_music_ + 0.1, 1.0)
-                    set_background_music_(background_music_)
+                    background_music_volume = min(background_music_volume + 0.1, 1.0)
+                    set_background_music_volume(background_music_volume)
                 if MINUS_BUTTON_ONE.checkForInput(OPTIONS_MOUSE_POS):
-                    background_music_ = max(background_music_ - 0.1, 0.0)
-                    set_background_music_(background_music_)
+                    background_music_volume = max(background_music_volume - 0.1, 0.0)
+                    set_background_music_volume(background_music_volume)
                 if PLUS_BUTTON_TWO.checkForInput(OPTIONS_MOUSE_POS):
-                    _SFX = min(_SFX + 0.1, 1.0)
-                    print(f" increased to {_SFX:.1f}")
-                    set_sound_effect_(_SFX)
+                    volume_SFX = min(volume_SFX + 0.1, 1.0)
+                    set_sound_effect_volume(volume_SFX)
+                    print(f"Volume increased to {volume_SFX:.1f}")
+                    print("hii")
                 if MINUS_BUTTON_TWO.checkForInput(OPTIONS_MOUSE_POS):
-                    _SFX = max(_SFX - 0.1, 0.0)
-                    print(f" decreased to {_SFX:.1f}")
-                    set_sound_effect_(_SFX)
+                    volume_SFX = max(volume_SFX - 0.1, 0.0)
+                    set_sound_effect_volume(volume_SFX)
+                    print(f"Volume decreased to {volume_SFX:.1f}")
+                    print("byee")
                 if PLUS_BUTTON_THREE.checkForInput(OPTIONS_MOUSE_POS):
                     wall_count += 1
                     if wall_count > 10:
@@ -190,7 +192,7 @@ def options():
                     max_wall -= 3
                     if max_wall < 12:
                         max_wall = 12
-                set_sound_effect_(_SFX)   
+                set_sound_effect_volume(volume_SFX)   
 
         pygame.display.update()
 

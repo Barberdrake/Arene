@@ -121,12 +121,12 @@ def options():
         SCREEN.blit(Walls_Max_TEXT, Walls_Max_RECT)
 
         #TEXT for Background Sound Volume Options
-        Background_TEXT = get_font(45).render("Background Volume", True, "Black")
+        Background_TEXT = get_font(45).render(f"Background : {background_music_volume:.1f}", True, "Black")
         Background_RECT = Background_TEXT.get_rect(center=(window_width//2,window_height*0.2))
         SCREEN.blit(Background_TEXT, Background_RECT)
 
         #TEXT for Sound effects Volume Options
-        SFX_TEXT = get_font(45).render("SFX Volume", True, "Black")
+        SFX_TEXT = get_font(45).render(f"SFX Volume : {volume_SFX:.1f}", True, "Black")
         SFX_RECT = SFX_TEXT.get_rect(center=(window_width//2,window_height*0.4))
         SCREEN.blit(SFX_TEXT, SFX_RECT)
 

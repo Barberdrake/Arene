@@ -45,6 +45,7 @@ info = pygame.display.Info()
 screen_width,screen_height = info.current_w,info.current_h
 print("screen_width",screen_width,"screen_height",screen_height)
 window_width,window_height = screen_width-10,screen_height-50
+print("window_width", window_width,"window_height",window_height)
 SCREEN = pygame.display.set_mode((window_width,window_height))
 pygame.display.set_caption("Menu")
 
@@ -106,32 +107,23 @@ def options():
         SCREEN.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
         #TEXT for the Wall Count per Round Option
-        Wall_Count_TEXT = get_font(45).render(str(wall_count), True, "Black")
-        Wall_Count_RECT = Wall_Count_TEXT.get_rect(center=(window_width//2+350,window_height*0.6))
+        Wall_Count_TEXT = get_font(45).render(f"Walls per round: {str(wall_count)}", True, "Black")
+        Wall_Count_RECT = Wall_Count_TEXT.get_rect(center=(window_width*0.5,window_height*0.6))
         SCREEN.blit(Wall_Count_TEXT, Wall_Count_RECT)
         
-        Walls_Rounds_TEXT = get_font(45).render("Walls per round: ", True, "Black")
-        Walls_Rounds_RECT = Walls_Rounds_TEXT.get_rect(center=(window_width//2-30,window_height*0.6))
-        SCREEN.blit(Walls_Rounds_TEXT, Walls_Rounds_RECT)
-
-        
         #TEXT for the Max Walls per Round
-        Wall_MaxNumber_TEXT = get_font(45).render(str(max_wall), True, "Black")
-        Wall_MaxNumber_RECT = Wall_MaxNumber_TEXT.get_rect(center=(window_width//2+225,window_height*0.8))
-        SCREEN.blit(Wall_MaxNumber_TEXT, Wall_MaxNumber_RECT)
-        
-        Walls_Max_TEXT = get_font(45).render("Max walls: ", True, "Black")
-        Walls_Max_RECT = Walls_Max_TEXT.get_rect(center=(window_width//2-30,window_height*0.8))
+        Walls_Max_TEXT = get_font(45).render(f"Max walls: {str(max_wall)}", True, "Black")
+        Walls_Max_RECT = Walls_Max_TEXT.get_rect(center=(window_width*0.5,window_height*0.8))
         SCREEN.blit(Walls_Max_TEXT, Walls_Max_RECT)
 
         #TEXT for Background Sound Volume Options
         Background_TEXT = get_font(45).render(f"Background : {background_music_volume:.1f}", True, "Black")
-        Background_RECT = Background_TEXT.get_rect(center=(window_width//2,window_height*0.2))
+        Background_RECT = Background_TEXT.get_rect(center=(window_width*0.5,window_height*0.2))
         SCREEN.blit(Background_TEXT, Background_RECT)
 
         #TEXT for Sound effects Volume Options
         SFX_TEXT = get_font(45).render(f"SFX Volume : {volume_SFX:.1f}", True, "Black")
-        SFX_RECT = SFX_TEXT.get_rect(center=(window_width//2,window_height*0.4))
+        SFX_RECT = SFX_TEXT.get_rect(center=(window_width*0.5,window_height*0.4))
         SCREEN.blit(SFX_TEXT, SFX_RECT)
 
         OPTIONS_BACK = Button(image=None, pos=(window_width//2,QUIT_Y), 
@@ -343,7 +335,8 @@ def move_player(player, dx, dy, trail_color, player_color, opponent):
         
         return False
 
-def get_font(size): 
+def get_font(size):
+    size = int(size*min(screen_width/1920, screen_height/1080))
     return pygame.font.Font("assets/font.ttf", size)
 
 def play():

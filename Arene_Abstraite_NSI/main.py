@@ -301,11 +301,11 @@ def move_player(player, dx, dy, trail_color, player_color, opponent):
     global rounds
     
     nx, ny = player["x"] + dx, player["y"] + dy
-
-    if 0 <= nx < GRID_SIZE and 0 <= ny < GRID_SIZE and grid[ny][nx] not in ("gray"):
-        grid[player["y"]][player["x"]] = trail_color
     
         
+    if 0 <= nx < GRID_SIZE and 0 <= ny < GRID_SIZE and grid[ny][nx] not in ("gray"):
+        grid[player["y"]][player["x"]] = trail_color
+         
         if grid[ny][nx] == "frost":
             Freeze_SFX.play()
             frost_animation(opponent)
@@ -332,6 +332,9 @@ def move_player(player, dx, dy, trail_color, player_color, opponent):
         elif grid[ny][nx] == "peach":
             Peach_Puff_SFX.play()
             rounds += 6
+            
+    if 0 <= nx < GRID_SIZE and 0 <= ny < GRID_SIZE and grid[ny][nx] in ("gray"):
+        Error_Sound.play()
         
         return False
 

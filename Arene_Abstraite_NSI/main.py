@@ -63,7 +63,7 @@ Background_Image = pygame.image.load("assets/Background.png")
 Background_Image = pygame.transform.scale(Background_Image, DEFAULT_IMAGE_SISE)
 Side_Bar_Image = pygame.image.load("assets/side_bar.png")
 Rules_Image = pygame.image.load("assets/rulerer.png")
-Rules_Image = pygame.transform.scale(Rules_Image, (screen_width-screen_width*0.1, screen_height-screen_height*0.1))
+Rules_Image = pygame.transform.scale(Rules_Image, (screen_width*0.9, screen_height*0.9))
 frost_image = pygame.image.load("assets/frost.png")
 
 

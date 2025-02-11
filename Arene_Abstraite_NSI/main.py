@@ -43,6 +43,7 @@ os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
 info = pygame.display.Info() 
 screen_width,screen_height = info.current_w,info.current_h
+print("screen_width",screen_width,"screen_height",screen_height)
 window_width,window_height = screen_width-10,screen_height-50
 SCREEN = pygame.display.set_mode((window_width,window_height))
 pygame.display.set_caption("Menu")
@@ -62,7 +63,7 @@ Background_Image = pygame.image.load("assets/Background.png")
 Background_Image = pygame.transform.scale(Background_Image, DEFAULT_IMAGE_SISE)
 Side_Bar_Image = pygame.image.load("assets/side_bar.png")
 Rules_Image = pygame.image.load("assets/rulerer.png")
-Rules_Image = pygame.transform.scale(Rules_Image, (1920, 1080))
+Rules_Image = pygame.transform.scale(Rules_Image, (screen_width-screen_width*0.1, screen_height-screen_height*0.1))
 frost_image = pygame.image.load("assets/frost.png")
 
 
@@ -311,6 +312,7 @@ def move_player(player, dx, dy, trail_color, player_color, opponent):
 
     if 0 <= nx < GRID_SIZE and 0 <= ny < GRID_SIZE and grid[ny][nx] not in ("gray"):
         grid[player["y"]][player["x"]] = trail_color
+    
         
         if grid[ny][nx] == "frost":
             Freeze_SFX.play()
@@ -686,9 +688,9 @@ def RULES():
     while True:
         SCREEN.fill("white")
         RULES_MOUSE_POS = pygame.mouse.get_pos()
-        SCREEN.blit(Rules_Image, (0, -50))
+        SCREEN.blit(Rules_Image, (int(screen_width/25), int(screen_height/215)))
         
-        back_BUTTON = Button(image=None, pos=(window_width//2, window_height*0.9), 
+        back_BUTTON = Button(image=None, pos=(window_width*0.825, window_height*0.85), 
                             text_input="BACK", font=get_font(75), base_color="Black", hovering_color="Green")
 
         for button in [back_BUTTON]:

@@ -49,7 +49,7 @@ PEACH = (255, 218, 185) #add rounds effect, peach colour
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
 info = pygame.display.Info() 
-screen_width,screen_height = 1366, 768
+screen_width,screen_height = info.current_w,info.current_h
 print("screen_width",screen_width,"screen_height",screen_height)
 window_width,window_height = screen_width-int(10*min(screen_width/1920, screen_height/1080)),screen_height-int(50*min(screen_width/1920, screen_height/1080))
 print("window_width", window_width,"window_height",window_height)

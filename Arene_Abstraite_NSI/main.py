@@ -5,6 +5,7 @@ import pygame
 from pygame import mixer
 from button import Button
 
+
 """Game made by people with limited and basic knowledge on coding, PLZ no hate, THANKS FOR PLAYING <3"""
 
 mixer.init() #command to add sounds
@@ -63,6 +64,9 @@ Arene = pygame.transform.scale(Arene, DEFAULT_IMAGE_SIZE)
 Background_Image = pygame.image.load("assets/Background.png")
 Background_Image = pygame.transform.scale(Background_Image, DEFAULT_IMAGE_SISE)
 Side_Bar_Image = pygame.image.load("assets/side_bar.png")
+Side_Bar_Image = pygame.transform.scale(Side_Bar_Image, (int(700*min(screen_width/1920, screen_height/1080)), int(1230*min(screen_width/1920, screen_height/1080))))
+
+
 Rules_Image = pygame.image.load("assets/rulerer.png")
 Rules_Image = pygame.transform.scale(Rules_Image, (screen_width*0.9, screen_height*0.9))
 frost_image = pygame.image.load("assets/frost.png")
@@ -75,10 +79,10 @@ arena_x_offset = (screen_width - ARENA_WIDTH) // 2
 arena_y_offset = (screen_height - ARENA_HEIGHT) // 2
 
 player_blue = {"x": 1, "y": 1, "score": 0}
-player_red = {"x": 18, "y": 18, "score": 0}
+player_red = {"x": int(18*min(screen_width/1920, screen_height/1080)), "y": int(18*min(screen_width/1920, screen_height/1080)), "score": 0}
 grid = [["green" for _ in range(GRID_SIZE)] for _ in range(GRID_SIZE)]
 grid[1][1] = "gray"
-grid[18][18] = "gray"
+grid[int(18*min(screen_width/1920, screen_height/1080))][int(18*min(screen_width/1920, screen_height/1080))] = "gray"
 
 wall_count = 5
 wall_chance = 0.05
@@ -400,11 +404,11 @@ def game():
     global grid
     grid = [["green" for _ in range(GRID_SIZE)] for _ in range(GRID_SIZE)]
     grid[1][1] = "gray"  # Blue player's starting position
-    grid[18][18] = "gray"  # Red player's starting position
+    grid[int(18*min(screen_width/1920, screen_height/1080))][int(18*min(screen_width/1920, screen_height/1080))] = "gray"  # Red player's starting position
 
     global player_blue, player_red
     player_blue = {"x": 1, "y": 1, "score": 0}  # Blue starts in top-left corner
-    player_red = {"x": 18, "y": 18, "score": 0}  # Red starts in bottom-right corner
+    player_red = {"x": int(18*min(screen_width/1920, screen_height/1080)), "y": int(18*min(screen_width/1920, screen_height/1080)), "score": 0}  # Red starts in bottom-right corner
 
     spawn_energy()
     

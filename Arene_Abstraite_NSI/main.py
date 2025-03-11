@@ -5,7 +5,7 @@ import pygame
 from pygame import mixer
 from button import Button
 
-"""Game made by people with limited and basic knowledge on coding, PLZ no hate, THANKS FOR PLAYING <3"""
+"""Game made by people with limited and basic knowledge on coding, Please no hate, THANKS FOR PLAYING <3"""
 
 def resize_image(image): #definition to adapt images to the screen size
     image_size = image.get_rect()

@@ -5,8 +5,14 @@ import pygame
 from pygame import mixer
 from button import Button
 
-
 """Game made by people with limited and basic knowledge on coding, PLZ no hate, THANKS FOR PLAYING <3"""
+
+def resize_image(image): #definition to adapt images to the screen size
+    image_size = image.get_rect()
+    image_width = image_size.width
+    image_height = image_size.height
+    image = pygame.transform.scale(image,(int(image_width*min(screen_width/1920, screen_height/1080)), int(image_height*min(screen_width/1920, screen_height/1080))))
+    return image
 
 mixer.init() #command to add sounds
 mixer.music.load("music/Background_music.mp3") #Background sound uploading
@@ -43,7 +49,7 @@ PEACH = (255, 218, 185) #add rounds effect, peach colour
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
 info = pygame.display.Info() 
-screen_width,screen_height = info.current_w,info.current_h
+screen_width,screen_height = 1366, 768
 print("screen_width",screen_width,"screen_height",screen_height)
 window_width,window_height = screen_width-int(10*min(screen_width/1920, screen_height/1080)),screen_height-int(50*min(screen_width/1920, screen_height/1080))
 print("window_width", window_width,"window_height",window_height)
@@ -69,8 +75,7 @@ Side_Bar_Image = pygame.transform.scale(Side_Bar_Image, (int(700*min(screen_widt
 
 Rules_Image = pygame.image.load("assets/rulerer.png")
 Rules_Image = pygame.transform.scale(Rules_Image, (screen_width*0.9, screen_height*0.9))
-frost_image = pygame.image.load("assets/frost.png")
-
+frost_image = resize_image(pygame.image.load("assets/frost.png"))
 
 PIXEL_SIZE = int(25*min(screen_width/1920, screen_height/1080))
 GRID_SIZE = int(20*min(screen_width/1920, screen_height/1080))
@@ -132,21 +137,28 @@ def options():
 
         OPTIONS_BACK = Button(image=None, pos=(window_width//2,QUIT_Y), 
                             text_input="BACK", font=get_font(75), base_color="Black", hovering_color="Green")
-        PLUS_BUTTON_Background = Button(image=pygame.image.load("assets/plus.png"), pos=(window_width*3//4,window_height*0.2), 
+        PLUS_BUTTON_Background = Button(image=resize_image(pygame.image.load("assets/plus.png")), pos=(window_width*3//4,window_height*0.2), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        MINUS_BUTTON_Background = Button(image=pygame.image.load("assets/minus.png"), pos=(window_width//4,window_height*0.2), 
+        
+        MINUS_BUTTON_Background = Button(image=resize_image(pygame.image.load("assets/minus.png")), pos=(window_width//4,window_height*0.2), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        PLUS_BUTTON_SFX = Button(image=pygame.image.load("assets/plus.png"), pos=(window_width*3//4,window_height*0.4), 
+        
+        PLUS_BUTTON_SFX = Button(image=resize_image(pygame.image.load("assets/plus.png")), pos=(window_width*3//4,window_height*0.4), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        MINUS_BUTTON_SFX = Button(image=pygame.image.load("assets/minus.png"), pos=(window_width//4,window_height*0.4), 
+        
+        MINUS_BUTTON_SFX = Button(image=resize_image(pygame.image.load("assets/minus.png")), pos=(window_width//4,window_height*0.4), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        PLUS_BUTTON_Wall_Count = Button(image=pygame.image.load("assets/plus.png"), pos=(window_width*3//4,window_height*0.6), 
+        
+        PLUS_BUTTON_Wall_Count = Button(image=resize_image(pygame.image.load("assets/plus.png")), pos=(window_width*3//4,window_height*0.6), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        MINUS_BUTTON_Wall_Count = Button(image=pygame.image.load("assets/minus.png"), pos=(window_width//4,window_height*0.6), 
+        
+        MINUS_BUTTON_Wall_Count = Button(image=resize_image(pygame.image.load("assets/minus.png")), pos=(window_width//4,window_height*0.6), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        PLUS_BUTTON_Max_Wall = Button(image=pygame.image.load("assets/plus.png"), pos=(window_width*3//4,window_height*0.8), 
+        
+        PLUS_BUTTON_Max_Wall = Button(image=resize_image(pygame.image.load("assets/plus.png")), pos=(window_width*3//4,window_height*0.8), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        MINUS_BUTTON_Max_Wall = Button(image=pygame.image.load("assets/minus.png"), pos=(window_width//4,window_height*0.8), 
+        
+        MINUS_BUTTON_Max_Wall = Button(image=resize_image(pygame.image.load("assets/minus.png")), pos=(window_width//4,window_height*0.8), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
         
         for button in [PLUS_BUTTON_Background, MINUS_BUTTON_Background, PLUS_BUTTON_SFX, MINUS_BUTTON_SFX, PLUS_BUTTON_Wall_Count, MINUS_BUTTON_Wall_Count, PLUS_BUTTON_Max_Wall, MINUS_BUTTON_Max_Wall]:
@@ -359,13 +371,17 @@ def play():
 
         BACK_Play_Button = Button(image=None, pos=(window_width//2, window_height*0.9), 
                             text_input="BACK", font=get_font(75), base_color="White", hovering_color="Green")
-        Twenty_Rounds_Button = Button(image=pygame.image.load("assets/20wings.png"), pos=(window_width*3//4,window_height*0.5), 
+        
+        Twenty_Rounds_Button = Button(image=resize_image(pygame.image.load("assets/20wings.png")), pos=(window_width*3//4,window_height*0.5), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        Fifty_Rounds_Button = Button(image=pygame.image.load("assets/50crown.png"), pos=(window_width*0.47,window_height*0.5), 
+        
+        Fifty_Rounds_Button = Button(image=resize_image(pygame.image.load("assets/50crown.png")), pos=(window_width*0.47,window_height*0.5), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        Hundred_Rounds_Button = Button(image=pygame.image.load("assets/100castle.png"), pos=(window_width*1//4,window_height*0.48), 
+        
+        Hundred_Rounds_Button = Button(image=resize_image(pygame.image.load("assets/100castle.png")), pos=(window_width*1//4,window_height*0.48), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        RULES_Button = Button(image=pygame.image.load("assets/Rules.png"), pos=(window_width*0.5,window_height*0.75), 
+        
+        RULES_Button = Button(image=resize_image(pygame.image.load("assets/Rules.png")), pos=(window_width*0.5,window_height*0.75), 
                             text_input=" ", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
 
         for button in [Twenty_Rounds_Button, Fifty_Rounds_Button, Hundred_Rounds_Button, RULES_Button]:
@@ -414,67 +430,67 @@ def game():
     
     Player1_turn = True #is it Player 1's turn = True
 
-    UP_2x_Blue_Button = Button(image=pygame.image.load("assets/arrows/player2-dubarrow-up.png"), 
+    UP_2x_Blue_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player2-dubarrow-up.png")), 
                                 pos=(window_width // 6, OPTION_Y-int(250*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                                 font=get_font(75), base_color="#24d19a", hovering_color="Blue")
     
-    LEFT_2x_Blue_Button = Button(image=pygame.image.load("assets/arrows/player2-dubarrow-left.png"), 
+    LEFT_2x_Blue_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player2-dubarrow-left.png")), 
                                   pos=(window_width // 18, OPTION_Y - int(50*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                                   font=get_font(75), base_color="#24d19a", hovering_color="Blue")
     
-    RIGHT_2x_Blue_Button = Button(image=pygame.image.load("assets/arrows/player2-dubarrow-right.png"), 
+    RIGHT_2x_Blue_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player2-dubarrow-right.png")), 
                                    pos=((window_width // 4) + int(50*min(screen_width/1920, screen_height/1080)), OPTION_Y - int(50*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                                    font=get_font(75), base_color="#24d19a", hovering_color="Blue")
     
-    DOWN_2x_Blue_Button = Button(image=pygame.image.load("assets/arrows/player2-dubarrow-down.png"), 
+    DOWN_2x_Blue_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player2-dubarrow-down.png")), 
                                   pos=(window_width // 6, OPTION_Y + int(150*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                                   font=get_font(75), base_color="#24d19a", hovering_color="Blue")
     
-    UP_Blue_Button = Button(image=pygame.image.load("assets/arrows/player2-arrow-up.png"), 
+    UP_Blue_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player2-arrow-up.png")), 
                             pos=(window_width // 6, OPTION_Y - int(150*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                             font=get_font(75), base_color="#24d19a", hovering_color="Blue")
     
-    LEFT_Blue_Button = Button(image=pygame.image.load("assets/arrows/player2-arrow-left.png"), 
+    LEFT_Blue_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player2-arrow-left.png")), 
                               pos=(window_width // 6 - int(108*min(screen_width/1920, screen_height/1080)), OPTION_Y - int(50*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                               font=get_font(75), base_color="#24d19a", hovering_color="Blue")
     
-    RIGHT_Blue_Button = Button(image=pygame.image.load("assets/arrows/player2-arrow-right.png"), 
+    RIGHT_Blue_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player2-arrow-right.png")), 
                                pos=(window_width // 4 - int(52*min(screen_width/1920, screen_height/1080)), OPTION_Y - int(50*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                                font=get_font(75), base_color="#24d19a", hovering_color="Blue")
     
-    DOWN_Blue_Button = Button(image=pygame.image.load("assets/arrows/player2-arrow-down.png"), 
+    DOWN_Blue_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player2-arrow-down.png")), 
                               pos=(window_width // 6, OPTION_Y + int(50*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                               font=get_font(75), base_color="#24d19a", hovering_color="Blue")
 
-    UP_2x_Red_Button = Button(image=pygame.image.load("assets/arrows/player1-dubarrow-up.png"), 
+    UP_2x_Red_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player1-dubarrow-up.png")), 
                                 pos=(window_width // 6 + int(1275*min(screen_width/1920, screen_height/1080)), OPTION_Y - int(250*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                                 font=get_font(75), base_color="#24d19a", hovering_color="Blue")
     
-    LEFT_2x_Red_Button = Button(image=pygame.image.load("assets/arrows/player1-dubarrow-left.png"), 
+    LEFT_2x_Red_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player1-dubarrow-left.png")), 
                                   pos=(window_width // 18 + int(1275*min(screen_width/1920, screen_height/1080)), OPTION_Y - int(50*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                                   font=get_font(75), base_color="#24d19a", hovering_color="Blue")
     
-    RIGHT_2x_Red_Button = Button(image=pygame.image.load("assets/arrows/player1-dubarrow-right.png"), 
+    RIGHT_2x_Red_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player1-dubarrow-right.png")), 
                                    pos=((window_width // 4) + int(1325*min(screen_width/1920, screen_height/1080)), OPTION_Y - int(50*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                                    font=get_font(75), base_color="#24d19a", hovering_color="Blue")
     
-    DOWN_2x_Red_Button = Button(image=pygame.image.load("assets/arrows/player1-dubarrow-down.png"), 
+    DOWN_2x_Red_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player1-dubarrow-down.png")), 
                                   pos=(window_width // 6 + int(1275*min(screen_width/1920, screen_height/1080)), OPTION_Y + int(150*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                                   font=get_font(75), base_color="#24d19a", hovering_color="Blue")
     
-    UP_Red_Button = Button(image=pygame.image.load("assets/arrows/player1-arrow-up.png"), 
+    UP_Red_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player1-arrow-up.png")), 
                             pos=(window_width // 6 + int(1275*min(screen_width/1920, screen_height/1080)), OPTION_Y - int(150*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                             font=get_font(75), base_color="#24d19a", hovering_color="Blue")
     
-    LEFT_Red_Button = Button(image=pygame.image.load("assets/arrows/player1-arrow-left.png"), 
+    LEFT_Red_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player1-arrow-left.png")), 
                               pos=(window_width // 6 + int(1167*min(screen_width/1920, screen_height/1080)), OPTION_Y - int(50*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                               font=get_font(75), base_color="#24d19a", hovering_color="Blue")
     
-    RIGHT_Red_Button = Button(image=pygame.image.load("assets/arrows/player1-arrow-right.png"), 
+    RIGHT_Red_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player1-arrow-right.png")), 
                                pos=(window_width // 4 + int(1223*min(screen_width/1920, screen_height/1080)), OPTION_Y - int(50*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                                font=get_font(75), base_color="#24d19a", hovering_color="Blue")
     
-    DOWN_Red_Button = Button(image=pygame.image.load("assets/arrows/player1-arrow-down.png"), 
+    DOWN_Red_Button = Button(image=resize_image(pygame.image.load("assets/arrows/player1-arrow-down.png")), 
                               pos=(window_width // 6 + int(1275*min(screen_width/1920, screen_height/1080)), OPTION_Y + int(50*min(screen_width/1920, screen_height/1080))), text_input=" ", 
                               font=get_font(75), base_color="#24d19a", hovering_color="Blue")
     
@@ -670,11 +686,13 @@ def main_menu():
         MENU_TEXT = get_font(100).render(" ", True, "#b68f40")
         MENU_RECT = MENU_TEXT.get_rect(center=(int(640*min(screen_width/1920, screen_height/1080)), int(100*min(screen_width/1920, screen_height/1080))))
        
-        PLAY_BUTTON = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(window_width//2,OPTION_Y-int(125*min(screen_width/1920, screen_height/1080))), 
+        PLAY_BUTTON = Button(image=resize_image(pygame.image.load("assets/Play Rect.png")), pos=(window_width//2,OPTION_Y-int(125*min(screen_width/1920, screen_height/1080))), 
                             text_input=" ", font=get_font(75), base_color="#24d19a", hovering_color="Blue")
-        OPTIONS_BUTTON = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(window_width//2,OPTION_Y), 
+        
+        OPTIONS_BUTTON = Button(image=resize_image(pygame.image.load("assets/Options Rect.png")), pos=(window_width//2,OPTION_Y), 
                             text_input="  ", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        QUIT_BUTTON = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(window_width//2,QUIT_Y), 
+        
+        QUIT_BUTTON = Button(image=resize_image(pygame.image.load("assets/Quit Rect.png")), pos=(window_width//2,QUIT_Y), 
                             text_input=" ", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
 
         SCREEN.blit(MENU_TEXT, MENU_RECT)

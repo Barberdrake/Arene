@@ -5,6 +5,8 @@ import pygame
 from pygame import mixer
 from button import Button
 
+#Projet : Arene Abstraite
+#Auteurs : Baptiste DERIEN, Alex GUERIN-ARCHAMBEAUD, Daphné DREBET
 """Game made by people with limited and basic knowledge on coding, Please no hate, THANKS FOR PLAYING <3"""
 
 def resize_image(image): #definition to adapt images to the screen size

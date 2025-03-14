@@ -360,10 +360,12 @@ def get_font(size):
 
 def play():
     global rounds
+    global FROST
     while True:
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
         
         SCREEN.fill("black")
+        FROST = 0
         
         PLAY_TEXT = get_font(45).render("How many rounds?", True, "White")
         PLAY_RECT = PLAY_TEXT.get_rect(center=(window_width//2, window_height*0.2))
